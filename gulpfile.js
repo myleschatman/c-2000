@@ -29,11 +29,12 @@ gulp.task('static', () => {
 });
 
 gulp.task('phaser', () => {
-  return gulp.src(['./node_modules/phaser/build/phaser.min.js', './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js'])
+  return gulp.src(['./node_modules/phaser/build/phaser.min.js',
+  './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js'])
     .pipe(gulp.dest('./build/scripts'));
 });
 
-gulp.task('build', ['phaser'], () => {
+gulp.task('build', () => {
   return browserify({
     entries: './src/client/index.js',
     debug: true
@@ -62,4 +63,4 @@ gulp.task('serve', () => {
   gulp.watch('./src/**/*.js', ['build']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'style', 'build', 'serve']);
+gulp.task('default', ['clean', 'static', 'style', 'phaser', 'build', 'serve']);
