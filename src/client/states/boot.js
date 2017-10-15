@@ -4,7 +4,7 @@ export default class Boot extends Phaser.State {
   }
 
   preload() {
-    this.game.plugins.add(new Phaser.Plugin.Isometric(this.game));
+
   }
 
   create() {

@@ -1,8 +1,8 @@
 export default class Menu {
-  prelaod() {
+  preload() {
 
   }
   create() {
-    
+    this.game.state.start('game');
   }
 }

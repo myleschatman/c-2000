@@ -1,6 +1,7 @@
 export default class Preload {
   constructor() {
-
+    this.asset = null;
+    this.ready = false;
   }
 
   preload() {
@@ -12,6 +13,12 @@ export default class Preload {
   }
 
   update() {
-    this.game.state.start('menu');
+    if(this.ready) {
+      this.game.state.start('menu');
+    }
+  }
+
+  onLoadComplete() {
+    this.ready = true;
   }
 }
