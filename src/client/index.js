@@ -7,7 +7,7 @@ const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO,
 
 game.state.add('boot', new Boot());
 game.state.add('preload', new Preload());
-game.state.add('game', new Game());
 game.state.add('menu', new Menu());
+game.state.add('game', new Game());
 
-game.state.start('boot');
+game.state.start('preload');
