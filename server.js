@@ -8,7 +8,7 @@ app.use('js', express.static(__dirname + '/js'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.listen(8081, function() {
