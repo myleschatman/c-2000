@@ -28,9 +28,11 @@ gulp.task('static', () => {
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('phaser', () => {
+gulp.task('libs', () => {
   return gulp.src(['./node_modules/phaser/build/phaser.min.js',
-    './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js'])
+    './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js',
+    './node_modules/socket.io-client/socket.io.min.js'
+    ])
     .pipe(gulp.dest('./build/scripts'));
 });
 
@@ -63,4 +65,4 @@ gulp.task('serve', () => {
   gulp.watch('./src/**/*.js', ['build']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'style', 'phaser', 'build', 'serve']);
+gulp.task('default', ['clean', 'static', 'style', 'libs', 'build', 'serve']);
