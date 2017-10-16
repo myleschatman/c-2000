@@ -13,7 +13,6 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.13",
     "browserify": "^14.4.0",
-    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-buffer": "0.0.2",
     "gulp-eslint": "^4.0.0",

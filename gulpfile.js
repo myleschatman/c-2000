@@ -3,15 +3,10 @@ const eslint = require('gulp-eslint');
 const buffer = require('gulp-buffer');
 const uglify = require('gulp-uglify');
 const gutil = require('gulp-util');
-const del = require('del');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
-
-gulp.task('clean', () => {
-  del(['./build/**/*.*']);
-});
 
 gulp.task('style', () => {
   return gulp.src([
@@ -30,8 +25,7 @@ gulp.task('static', () => {
 
 gulp.task('libs', () => {
   return gulp.src(['./node_modules/phaser/build/phaser.min.js',
-    './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js',
-    './node_modules/socket.io-client/socket.io.min.js'
+    './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js'
   ])
     .pipe(gulp.dest('./build/scripts'));
 });
@@ -65,4 +59,4 @@ gulp.task('serve', () => {
   gulp.watch('./src/**/*.js', ['build']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'style', 'libs', 'build', 'serve']);
+gulp.task('default', ['static', 'style', 'libs', 'build', 'serve']);
