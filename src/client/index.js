@@ -10,4 +10,4 @@ game.state.add('preload', new Preload());
 game.state.add('menu', new Menu());
 game.state.add('game', new Game());
 
-game.state.start('preload');
+game.state.start('boot');
