@@ -22,7 +22,7 @@ export default class Preload extends Phaser.State {
   }
 
   loadResources() {
-
+    this.game.load.image('blueplayer', 'assets/sprites/blueplayer_south.png');
   }
 
   onLoadComplete() {
