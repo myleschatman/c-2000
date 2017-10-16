@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.16.2",
     "phaser": "^2.6.2",
-    "phaser-plugin-isometric": "^0.9.2"
+    "phaser-plugin-isometric": "^0.9.2",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
