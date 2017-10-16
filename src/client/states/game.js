@@ -1,6 +1,8 @@
-export default class Game {
-  constructor() {
+import Player from '../prefabs/player';
 
+export default class Game extends Phaser.State {
+  constructor() {
+    super();
   }
 
   init() {
@@ -12,9 +14,10 @@ export default class Game {
   }
 
   create() {
-    this.game.plugins.add(new Phaser.Plugin.Isometric(this.game));
-
-    this.game.add.sprite(0, 0, 'blueplayer');
+    this.cursors = this.game.input.keyboard.createCursorKeys();
+    
+    this.player = new Player(this.game);
+    this.game.add.existing(this.player);
   }
 
   update() {

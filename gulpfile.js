@@ -32,7 +32,7 @@ gulp.task('libs', () => {
   return gulp.src(['./node_modules/phaser/build/phaser.min.js',
     './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js',
     './node_modules/socket.io-client/socket.io.min.js'
-    ])
+  ])
     .pipe(gulp.dest('./build/scripts'));
 });
 

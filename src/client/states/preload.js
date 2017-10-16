@@ -22,7 +22,10 @@ export default class Preload extends Phaser.State {
   }
 
   loadResources() {
-    this.game.load.image('blueplayer', 'assets/sprites/blueplayer_south.png');
+    this.game.load.atlas('blueplayer',
+      'assets/sprites/blue_player/idle/idle.png',
+      'assets/sprites/blue_player/idle/idle.json'
+    );
   }
 
   onLoadComplete() {
