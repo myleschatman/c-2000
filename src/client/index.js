@@ -3,8 +3,7 @@ import Preload from './states/preload';
 import Menu from './states/menu';
 import Game from './states/game';
 
-// const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
-const game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
 
 game.state.add('boot', new Boot());
 game.state.add('preload', new Preload());

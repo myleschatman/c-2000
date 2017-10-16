@@ -14,8 +14,6 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-    this.cursors = this.game.input.keyboard.createCursorKeys();
-
     this.player = new Player(this.game);
     this.game.add.existing(this.player);
   }
