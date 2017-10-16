@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+// var io = require('socket.io').listen(server);
 
 app.use('/css', express.static(__dirname + '/css'));
 app.use('js', express.static(__dirname + '/js'));
@@ -12,5 +12,5 @@ app.get('/', function(req, res) {
 });
 
 server.listen(8081, function() {
-  console.log('Listening on ' + server.address().port);
+  // console.log('Listening on ' + server.address().port);
 });
