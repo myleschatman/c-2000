@@ -26,6 +26,8 @@ export default class Preload extends Phaser.State {
       'assets/sprites/blue_player/idle/idle.png',
       'assets/sprites/blue_player/idle/idle.json'
     );
+
+    this.game.load.image('grass', 'assets/sprites/grass.png');
   }
 
   onLoadComplete() {
