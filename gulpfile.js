@@ -3,6 +3,7 @@ const eslint = require('gulp-eslint');
 const buffer = require('gulp-buffer');
 const uglify = require('gulp-uglify');
 const gutil = require('gulp-util');
+const del = require('del');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
 const browserify = require('browserify');
@@ -18,12 +19,16 @@ gulp.task('style', () => {
     .pipe(eslint.failOnError());
 });
 
-gulp.task('static', () => {
+gulp.task('clean', () => {
+  del(['build/**/*.*']);
+});
+
+gulp.task('static', ['clean'], () => {
   return gulp.src('./static/**/**')
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('libs', () => {
+gulp.task('libs', ['static'], () => {
   return gulp.src(['./node_modules/phaser/build/phaser.min.js',
     './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.js',
     './node_modules/socket.io-client/socket.io.min.js'
@@ -31,7 +36,7 @@ gulp.task('libs', () => {
     .pipe(gulp.dest('./build/scripts'));
 });
 
-gulp.task('build', () => {
+gulp.task('build', ['libs'], () => {
   return browserify({
     entries: './src/client/index.js',
     debug: true
@@ -50,14 +55,15 @@ gulp.task('build', () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('serve', () => {
+gulp.task('serve', ['build'], () => {
   browserSync.init({
     server: {
       baseDir: './build'
     },
     browser: 'chrome'
   });
-  gulp.watch('./src/**/*.js', ['build']).on('change', browserSync.reload);
+  gulp.watch('./src/**/*.*', ['build']).on('change', browserSync.reload);
+  gulp.watch('./static/**/*.*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['static', 'style', 'libs', 'build', 'serve']);
+gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
