@@ -29,6 +29,7 @@ export default class Preload extends Phaser.State {
 
     this.game.load.image('grass', 'assets/sprites/grass.png');
     this.game.load.image('grass_large', 'assets/sprites/grass_large.png');
+    this.game.load.image('grass_border', 'assets/sprites/grass_border.png');
   }
 
   onLoadComplete() {
