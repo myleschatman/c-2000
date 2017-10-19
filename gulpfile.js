@@ -63,7 +63,7 @@ gulp.task('serve', ['build'], () => {
     browser: 'chrome'
   });
   gulp.watch('./src/**/*.*', ['build']).on('change', browserSync.reload);
-  gulp.watch('./static/**/*.*', ['static']).on('change', browserSync.reload);
+  gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
 gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
