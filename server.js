@@ -3,14 +3,14 @@ var app = express();
 var server = require('http').Server(app);
 // var io = require('socket.io').listen(server);
 
-// app.use('/src', express.static(__dirname + '/src'));
-// app.use('/static', express.static(__dirname + '/static'));
-app.use('/build', express.static(__dirname + '/build'));
+app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/styles', express.static(__dirname + '/styles'));
+app.use('/scripts', express.static(__dirname + '/scripts'));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
 server.listen(8081, function() {
-
+  console.log(__dirname);
 });
