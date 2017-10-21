@@ -12,5 +12,5 @@ app.get('/', function(req, res) {
 });
 
 server.listen(8081, function() {
-  console.log(__dirname);
+  // console.log(__dirname);
 });
