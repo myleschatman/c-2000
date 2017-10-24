@@ -1,4 +1,5 @@
 import Player from '../prefabs/player';
+import Client from './client';
 
 export default class Game extends Phaser.State {
   constructor() {
@@ -28,6 +29,9 @@ export default class Game extends Phaser.State {
 
     this.player = new Player(this.game);
     this.game.add.existing(this.player);
+
+    this.connection = new Client();
+    this.connection.askNewPlayer();
   }
 
   update() {

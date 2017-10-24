@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-// var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/styles', express.static(__dirname + '/styles'));
@@ -12,5 +12,11 @@ app.get('/', function(req, res) {
 });
 
 server.listen(8081, function() {
-  // console.log(__dirname);
+
+});
+
+io.on('connection', function(socket) {
+  socket.on('newplayer', function() {
+
+  });
 });
