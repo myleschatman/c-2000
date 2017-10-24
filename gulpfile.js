@@ -15,7 +15,7 @@ gulp.task('style', () => {
     './*.js'
   ])
     .pipe(eslint())
-    .pipe(eslint.format())
+    .pipe(eslint.format());
     .pipe(eslint.failOnError());
 });
 
@@ -31,7 +31,7 @@ gulp.task('static', ['clean'], () => {
 gulp.task('libs', ['static'], () => {
   return gulp.src(['./node_modules/phaser/build/phaser.min.js',
     './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.js',
-    './node_modules/socket.io-client/socket.io.min.js'
+    './node_modules/socket.io-client/socket.io.min.js',
   ])
     .pipe(gulp.dest('./build/scripts'));
 });
@@ -65,5 +65,9 @@ gulp.task('serve', ['build'], () => {
   gulp.watch('./src/**/*.*', ['build']).on('change', browserSync.reload);
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
+
+// Kill processes when running browserSync:
+// netstat -ano | findstr :<PORT>
+// taskkill //PID <PID #> //F
 
 gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
