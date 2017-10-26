@@ -15,8 +15,19 @@ server.listen(8081, function() {
 
 });
 
+server.lastPlayerId = 0;
+
 io.on('connection', function(socket) {
   socket.on('newplayer', function() {
-
+    socket.player = {
+      id: server.lastPlayerId++,
+      x: randomInt(100, 400),
+      y: randomInt(100, 400)
+    };
+    socket.broadcast.emit('newplayer', socket.player);
   });
 });
+
+function randomInt(low, high) {
+  return Math.floor(Math.random() * (high - low) + low);
+}
