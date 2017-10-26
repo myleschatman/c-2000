@@ -1,8 +1,8 @@
 export default class Player extends Phaser.Sprite {
-  constructor(game) {
+  constructor(game, x, y, z) {
     super(game);
 
-    this.sprite = this.game.add.isoSprite(0, 0, 0, 'blueplayer', 0);
+    this.sprite = this.game.add.isoSprite(x, y, z, 'blueplayer', 0);
     this.sprite.anchor.set(0.5, 0.5);
     // this.sprite.scale.setTo(0.78);
 
