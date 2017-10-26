@@ -15,12 +15,12 @@ gulp.task('style', () => {
     './*.js'
   ])
     .pipe(eslint())
-    .pipe(eslint.format());
+    .pipe(eslint.format())
     .pipe(eslint.failOnError());
 });
 
 gulp.task('clean', () => {
-  del(['build/**/*.*']);
+  // del(['build/**/*.*']);
 });
 
 gulp.task('static', ['clean'], () => {
