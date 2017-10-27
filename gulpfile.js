@@ -20,7 +20,7 @@ gulp.task('style', () => {
 });
 
 gulp.task('clean', () => {
-  // del(['build/**/*.*']);
+  del(['build/**/*.*']);
 });
 
 gulp.task('static', ['clean'], () => {
@@ -66,8 +66,8 @@ gulp.task('serve', ['build'], () => {
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
+gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
+
 // Kill processes when running browserSync:
 // netstat -ano | findstr :<PORT>
 // taskkill //PID <PID #> //F
-
-gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
