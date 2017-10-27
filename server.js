@@ -18,9 +18,7 @@ server.listen(8081, function() {
 server.lastPlayerId = 0;
 
 io.on('connection', function(socket) {
-  console.log('Made socket connection with client.', socket.id);
   socket.on('newplayer', function() {
-    console.log('Received request to add new player.')
     socket.player = {
       id: server.lastPlayerId++,
       x: randomInt(100, 400),
