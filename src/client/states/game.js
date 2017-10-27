@@ -30,7 +30,6 @@ export default class Game extends Phaser.State {
 
   setEventHandlers(game) {
     this.socket.on('connect', () => {
-      console.log('Made socket connection with server.');
 
       this.socket.emit('newplayer');
 
