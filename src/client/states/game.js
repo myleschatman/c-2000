@@ -1,5 +1,5 @@
 import Player from '../prefabs/player';
-import Client from './client';
+import io from 'socket.io-client';
 
 export default class Game extends Phaser.State {
   constructor() {
@@ -14,15 +14,35 @@ export default class Game extends Phaser.State {
 
   }
 
-  create(game) {
+  create() {
+    this.playerMap = {};
+
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
-    this.client = new Client();
-    // this.client.askNewPlayer();
-    this.client.addNewPlayer(this.game);
+    this.socket = io.connect();
+
+    this.setEventHandlers(this.game);
   }
 
   update() {
 
+  }
+
+  setEventHandlers(game) {
+    this.socket.on('connect', () => {
+      console.log('Made socket connection with server.');
+
+      this.socket.emit('newplayer');
+
+      this.socket.on('newplayer', (data) => {
+        this.playerMap[data.id] = new Player(game, data.x, data.y, data.z);
+      });
+
+      this.socket.on('allplayers', (data) => {
+        for (var i = 0; i < data.length; i++) {
+          this.playerMap[data[i].id] = new Player(game, data[i].x, data[i].y, data[i].z);
+        }
+      });
+    });
   }
 }
