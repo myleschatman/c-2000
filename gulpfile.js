@@ -8,6 +8,7 @@ const source = require('vinyl-source-stream');
 const babelify = require('babelify');
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
+const nodemon = require('gulp-nodemon');
 
 gulp.task('style', () => {
   return gulp.src([
@@ -20,7 +21,7 @@ gulp.task('style', () => {
 });
 
 gulp.task('clean', () => {
-  // del(['build/**/*.*']);
+  del(['build/**/*.*']);
 });
 
 gulp.task('static', ['clean'], () => {
@@ -55,18 +56,32 @@ gulp.task('build', ['libs'], () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['build'], () => {
+gulp.task('nodemon', ['build'], (cb) => {
+  var started = false;
+
+  return nodemon({
+    script: 'server.js'
+  }).on('start', () => {
+    if (!started) {
+      cb();
+      started = true;
+    }
+  });
+});
+
+gulp.task('serve', ['nodemon'], () => {
   browserSync.init({
     server: {
       baseDir: './build'
     },
-    browser: 'chrome'
+    open: false
   });
   gulp.watch('./src/**/*.*', ['build']).on('change', browserSync.reload);
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'serve']);
+
+gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'nodemon', 'serve']);
 
 // Kill processes when running browserSync:
 // netstat -ano | findstr :<PORT>
