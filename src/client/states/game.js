@@ -18,7 +18,7 @@ export default class Game extends Phaser.State {
     this.playerMap = {};
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
-
+    console.log(this.cursors);
     this.socket = io.connect();
 
     this.setEventHandlers(this.game);
@@ -42,6 +42,13 @@ export default class Game extends Phaser.State {
           this.playerMap[data[i].id] = new Player(game, data[i].x, data[i].y, data[i].z);
         }
       });
+      if (this.cursors.down.isDown) {
+        this.movement = {
+          x: 1,
+          y: 1
+        }
+      }
+      this.socket.emit('movement', this.movement);
     });
   }
 }
