@@ -20,7 +20,7 @@ gulp.task('style', () => {
 });
 
 gulp.task('clean', () => {
-  del(['build/**/*.*']);
+  // del(['build/**/*.*']);
 });
 
 gulp.task('static', ['clean'], () => {
