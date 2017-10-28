@@ -3,12 +3,12 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
-app.use('/assets', express.static(__dirname + '/assets'));
-app.use('/styles', express.static(__dirname + '/styles'));
-app.use('/scripts', express.static(__dirname + '/scripts'));
+app.use('/assets', express.static(__dirname + '/build/assets'));
+app.use('/styles', express.static(__dirname + '/build/styles'));
+app.use('/scripts', express.static(__dirname + '/build/scripts'));
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/build/index.html');
 });
 
 server.listen(8081, function() {
