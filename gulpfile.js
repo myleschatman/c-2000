@@ -66,6 +66,10 @@ gulp.task('nodemon', ['build'], (cb) => {
       cb();
       running = true;
     }
+  }).on('restart', () => {
+    setTimeout(() => {
+      browserSync.reload();
+    }, 500);
   });
 });
 
