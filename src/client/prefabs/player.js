@@ -1,8 +1,7 @@
 export default class Player extends Phaser.Plugin.Isometric.IsoSprite {
-  constructor(game, x, y) {
-    super(game, x, y, 0, 'blueplayer', 0);
+  constructor(game, x, y, z) {
+    super(game, x, y, z, 'blueplayer', 0);
 
-    // this.sprite = this.game.add.isoSprite(x, y, 0, 'blueplayer');
     this.anchor.set(0.5, 0.5);
 
     this.animations.add('Walk_North', [0], 1, true);
@@ -17,10 +16,10 @@ export default class Player extends Phaser.Plugin.Isometric.IsoSprite {
     this.speed = 150;
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
-    // this.game.physics.isoArcade.enable(this.sprite);
+    this.game.physics.isoArcade.enable(this);
 
 
-    // this.sprite.body.collideWorldBounds = true;
+    this.body.collideWorldBounds = true;
     this.game.camera.follow(this);
   }
 
