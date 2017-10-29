@@ -56,7 +56,7 @@ gulp.task('build', ['libs'], () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('nodemon', ['build'], (cb) => {
+gulp.task('nodemon', ['build', 'static'], (cb) => {
   let running = false;
 
   return nodemon({
@@ -69,7 +69,7 @@ gulp.task('nodemon', ['build'], (cb) => {
   }).on('restart', () => {
     setTimeout(() => {
       browserSync.reload();
-    }, 500);
+    }, 2000);
   });
 });
 
@@ -86,9 +86,4 @@ gulp.task('serve', ['browser-sync'], () => {
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-
 gulp.task('default', ['clean', 'style', 'libs', 'static', 'build', 'nodemon', 'browser-sync', 'serve']);
-
-// Kill processes when running browserSync:
-// netstat -ano | findstr :<PORT>
-// taskkill //PID <PID #> //F
