@@ -18,7 +18,7 @@ export default class Game extends Phaser.State {
     this.playerMap = {};
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
-    this.socket = io.connect();
+    this.socket = io.connect('http://localhost:8081');
 
     this.setEventHandlers(this.game);
   }
