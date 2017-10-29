@@ -27,19 +27,24 @@ io.on('connection', function(socket) {
     };
     socket.emit('allplayers', getAllPlayers());
     socket.broadcast.emit('newplayer', socket.player);
+
+    socket.on('disconnect', function() {
+      io.emit('remove', socket.player.id);
+    });
   });
 });
 
 function getAllPlayers() {
+  console.log('---------------------');
   var players = [];
-
   Object.keys(io.sockets.connected).forEach(function(socketID) {
     var player = io.sockets.connected[socketID].player;
-
+    console.log(player.id);
     if (player) {
       players.push(player);
     }
   });
+  console.log('---------------------');
   return players;
 }
 
