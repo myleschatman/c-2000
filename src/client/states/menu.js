@@ -3,6 +3,6 @@ export default class Menu {
 
   }
   create() {
-    this.game.state.start('game');
+    this.game.state.start('Game');
   }
 }

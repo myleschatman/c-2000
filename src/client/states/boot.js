@@ -19,6 +19,6 @@ export default class Boot extends Phaser.State {
   create() {
     this.game.input.maxPointers = 1;
 
-    this.game.state.start('preload');
+    this.game.state.start('Preload');
   }
 }

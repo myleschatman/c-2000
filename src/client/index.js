@@ -3,11 +3,18 @@ import Preload from './states/preload';
 import Menu from './states/menu';
 import Game from './states/game';
 
-const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
+class App extends Phaser.Game {
+  constructor() {
+    super(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
 
-game.state.add('boot', new Boot());
-game.state.add('preload', new Preload());
-game.state.add('menu', new Menu());
-game.state.add('game', new Game());
+    this.state.add('Boot', Boot);
+    this.state.add('Preload', Preload);
+    this.state.add('Menu', Menu);
+    this.state.add('Game', Game);
 
-game.state.start('boot');
+    this.state.start('Boot');
+  }
+}
+
+new App();
+
