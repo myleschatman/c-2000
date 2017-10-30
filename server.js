@@ -42,7 +42,6 @@ function getAllPlayers() {
       players.push(player);
     }
   });
-  console.log(players);
   return players;
 }
 
