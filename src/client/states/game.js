@@ -15,19 +15,13 @@ export default class Game extends Phaser.State {
   }
 
   create() {
+    this.socket = io.connect('http://localhost:8081');
+
     this.playerMap = {};
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
-    this.socket = io.connect('http://localhost:8081');
-    // this.player = new Player(this.game, 0, 0, 0);
-    // this.game.add.existing(this.player);
-    this.player = this.game.add.isoSprite(0,0,0,'blueplayer',0);
-    this.game.physics.isoArcade.enable(this.player);
-    this.game.camera.follow(this.player);
-    this.player.destroy();
-    // delete this.player;
-    // console.log(this.player);
-    //this.setEventHandlers(this.game);
+
+    this.setEventHandlers(this.game);
   }
 
   update() {
@@ -48,23 +42,13 @@ export default class Game extends Phaser.State {
         for (var i = 0; i < data.length; i++) {
           this.playerMap[data[i].id] = new Player(game, data[i].x, data[i].y, data[i].z);
           game.add.existing(this.playerMap[data[i].id]);
-          console.log(this.playerMap[data[i].id]);
-          this.playerMap[data[i].id].destroy();
         }
       });
 
       this.socket.on('remove', (id) => {
-        // this.playerMap[id].destroy();
-        // delete this.playerMap[id];
+        this.playerMap[id].destroy();
+        delete this.playerMap[id];
       });
-
-      if (this.cursors.down.isDown) {
-        this.movement = {
-          x: 1,
-          y: 1
-        };
-      }
-      this.socket.emit('movement', this.movement);
     });
   }
 }

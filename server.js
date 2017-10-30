@@ -35,16 +35,14 @@ io.on('connection', function(socket) {
 });
 
 function getAllPlayers() {
-  console.log('---------------------');
   var players = [];
   Object.keys(io.sockets.connected).forEach(function(socketID) {
     var player = io.sockets.connected[socketID].player;
-    console.log(player.id);
     if (player) {
       players.push(player);
     }
   });
-  console.log('---------------------');
+  console.log(players);
   return players;
 }
 
