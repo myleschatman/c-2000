@@ -73,7 +73,7 @@ gulp.task('nodemon', ['build', 'static'], (cb) => {
   });
 });
 
-gulp.task('browser-sync', ['nodemon'], () => {
+gulp.task('browser-sync', () => {
   browserSync.init(null, {
     proxy: 'http://localhost:8081',
     browser: 'chrome',
