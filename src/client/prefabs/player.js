@@ -13,17 +13,8 @@ export default class Player extends Phaser.Plugin.Isometric.IsoSprite {
     this.animations.add('Walk_West', [6], 1, true);
     this.animations.add('Walk_NorthWest', [7], 1, true);
 
-    this.speed = 150;
-
-    this.cursors = this.game.input.keyboard.createCursorKeys();
     this.game.physics.isoArcade.enable(this);
-
-
     this.body.collideWorldBounds = true;
     this.game.camera.follow(this);
-  }
-
-  update() {
-
   }
 }
