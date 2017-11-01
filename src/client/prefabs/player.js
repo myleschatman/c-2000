@@ -15,6 +15,5 @@ export default class Player extends Phaser.Plugin.Isometric.IsoSprite {
 
     this.game.physics.isoArcade.enable(this);
     this.body.collideWorldBounds = true;
-    this.game.camera.follow(this);
   }
 }
