@@ -18,18 +18,24 @@ server.listen(8081, function() {
 server.lastPlayerId = 0;
 
 io.on('connection', function(socket) {
-  socket.on('newplayer', function() {
+  socket.on('new player', function() {
     socket.player = {
       id: server.lastPlayerId++,
       x: randomInt(100, 400),
       y: randomInt(100, 400),
       z: randomInt(100, 400)
     };
-    socket.emit('allplayers', getAllPlayers());
-    socket.broadcast.emit('newplayer', socket.player);
+    socket.emit('all players', getAllPlayers());
+    socket.broadcast.emit('new player', socket.player);
+
+    socket.on('click', function (data) {
+      socket.player.x -= data;
+      socket.player.y -= data;
+      io.emit('move player', socket.player);
+    });
 
     socket.on('disconnect', function() {
-      io.emit('remove', socket.player.id);
+      io.emit('remove player', socket.player.id);
     });
   });
 });
