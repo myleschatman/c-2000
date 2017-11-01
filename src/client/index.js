@@ -17,4 +17,3 @@ class App extends Phaser.Game {
 }
 
 new App();
-
