@@ -29,8 +29,10 @@ io.on('connection', function(socket) {
     socket.broadcast.emit('new player', socket.player);
 
     socket.on('click', function (data) {
-      socket.player.x -= data;
-      socket.player.y -= data;
+      if (data.direction === 'down') {
+        socket.player.x += data.speed;
+        socket.player.y += data.speed;
+      }
       io.emit('move player', socket.player);
     });
 
