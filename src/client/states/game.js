@@ -24,10 +24,11 @@ export default class Game extends Phaser.State {
   }
 
   update() {
-    var speed = 100;
+    let movement = { direction: null, speed: 100};
 
     if (this.cursors.down.isDown) {
-      this.client.sendMovement(speed);
+      movement.direction = 'down';
+      this.client.sendMovement(movement);
     }
   }
 
