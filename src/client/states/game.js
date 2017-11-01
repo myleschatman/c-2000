@@ -8,7 +8,7 @@ export default class Game extends Phaser.State {
   }
 
   init() {
-    this.game.state.disableVisiblityChange = true;
+    this.game.state.disableVisiblityChange = false;
   }
 
   preload() {
@@ -16,42 +16,28 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-    // this.setEventHandlers(this.game);
     this.playerMap = {};
 
     this.client.getNewPlayer();
+    this.game.add.isoSprite(0, 0, 0, 'grass_large');
+    this.cursors = this.game.input.keyboard.createCursorKeys();
   }
 
   update() {
+    var speed = 100;
 
+    if (this.cursors.down.isDown) {
+      this.client.sendMovement(speed);
+    }
   }
-
-  // setEventHandlers(game) {
-  //   this.socket.on('connect', () => {
-
-  //     this.socket.emit('newplayer');
-
-  //     this.socket.on('newplayer', (data) => {
-  //       this.playerMap[data.id] = new Player(game, data.x, data.y, data.z);
-  //       game.add.existing(this.playerMap[data.id]);
-  //     });
-
-  //     this.socket.on('allplayers', (data) => {
-  //       for (var i = 0; i < data.length; i++) {
-  //         this.playerMap[data[i].id] = new Player(game, data[i].x, data[i].y, data[i].z);
-  //         game.add.existing(this.playerMap[data[i].id]);
-  //       }
-  //     });
-
-  //     this.socket.on('remove', (id) => {
-  //       this.playerMap[id].destroy();
-  //       delete this.playerMap[id];
-  //     });
-  //   });
-  // }
 
   addNewPlayer(id, x, y, z) {
     this.playerMap[id] = new Player(this.game, x, y, z);
     this.game.add.existing(this.playerMap[id]);
+  }
+
+  movePlayer(id, x, y) {
+    this.playerMap[id].body.velocity.x = x;
+    this.playerMap[id].body.velocity.y = y;
   }
 }
